@@ -1,0 +1,20 @@
+[
+  {
+    "nome": "Cachorro",
+    "especie": "Canina",
+    "idade": 3,
+    "cor": "Marrom"
+  },
+  {
+    "nome": "Gato",
+    "especie": "Felina",
+    "idade": 2,
+    "cor": "Preto"
+  },
+  {
+    "nome": "Pássaro",
+    "especie": "Ave",
+    "idade": 1,
+    "cor": "Amarelo"
+  }
+]
