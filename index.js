@@ -2,9 +2,20 @@ var url = '/animais/';
 
 const express = require('express');
 const app = express();
-const fs = require('fs'); // Importa o módulo 'fs' para lidar com o sistema de arquivos
+const fs = require('fs'); 
 
 const port = 3001;
+
+app.set('view engine', 'ejs');
+
+// Define o diretório de visualizações
+app.set('views', './views');
+
+// Rota para renderizar a página de cadastro de animais
+app.get('/cadastro', (req, res) => {
+    res.render('cadastroAnimais');
+});
+
 
 // Função para ler o conteúdo do arquivo JSON
 const lerArquivoJSON = (caminhoArquivo) => {
@@ -25,20 +36,16 @@ const caminhoArquivo = './animais.json';
 // Importa a matriz de animais do arquivo JSON
 const animais = lerArquivoJSON(caminhoArquivo);
 
-// Verifica se a importação foi bem-sucedida
-if (!animais) {
-    console.log('Falha ao importar a matriz de animais.');
-    process.exit(1); // Sai do programa se a importação falhar
-}
+
 
 // Rota para '/animais' (GET)
 app.get('/animais', (req, res) => {
     console.log('bati no animal');
-    res.json(animais); // Retorna a lista de animais em formato JSON
+    res.json(animais); 
 });
 
 // Inicia o servidor para ouvir na porta especificada
 app.listen(port, () => {
-    console.log('Server is up on port', port);
+    console.log(`Servidor rodando em http://localhost:${port}`);
 });
 
