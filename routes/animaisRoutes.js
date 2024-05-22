@@ -7,7 +7,7 @@ router.get('/cadastro', (req, res) => {
 });
 
 router.post('/cadastro', (req, res) => {
- 
+
 });
 
 
