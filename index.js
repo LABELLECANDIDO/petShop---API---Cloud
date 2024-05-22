@@ -1,4 +1,3 @@
-var url = '/animais/';
 
 const express = require('express');
 const app = express();
@@ -36,13 +35,8 @@ const caminhoArquivo = './animais.json';
 // Importa a matriz de animais do arquivo JSON
 const animais = lerArquivoJSON(caminhoArquivo);
 
-
-
 // Rota para '/animais' (GET)
-app.get('/animais', (req, res) => {
-    console.log('bati no animal');
-    res.json(animais); 
-});
+app.get('/animais');
 
 // Inicia o servidor para ouvir na porta especificada
 app.listen(port, () => {
