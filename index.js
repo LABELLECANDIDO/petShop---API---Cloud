@@ -20,7 +20,6 @@ app.get('/cadastro', (req, res) => {
 // Função para ler o conteúdo do arquivo JSON
 const lerArquivoJSON = (caminhoArquivo) => {
     try {
-        // Lê o conteúdo do arquivo
         const animal = fs.readFileSync(caminhoArquivo, 'utf8');
         // Converte o conteúdo para um objeto JavaScript
         return JSON.parse(animal);
@@ -33,10 +32,8 @@ const lerArquivoJSON = (caminhoArquivo) => {
 // Caminho para o arquivo animais.json
 const caminhoArquivo = './animais.json';
 
-// Importa a matriz de animais do arquivo JSON
+
 const animais = lerArquivoJSON(caminhoArquivo);
-
-
 
 // Rota para '/animais' (GET)
 app.get('/animais', (req, res) => {
