@@ -1,11 +1,11 @@
 const Pet = require('../models/Pet');
 
 class PetController {
-    // Método para criar um novo pet
+    // Método para criar um novo 
     async store(req, res) {
         try {
             const data = await Pet.create(req.body);
-            return res.status(201).json(data);
+            return res.status(200).json(data);
         } catch (error) {
             return res.status(400).json({ error: error.message });
         }
