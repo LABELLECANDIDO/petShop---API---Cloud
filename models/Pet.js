@@ -1,27 +1,31 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema; // Definindo Schema a partir do mongoose
 
-// Criar schema para o objeto do array
-const pet = new mongoose.Schema({
-  nome: String,
-  idade: Number,
-  especie: String,
-  cor: String,
-  raca: String
+const petSchema = new Schema({
+    nome: {
+        type: String,
+        required: true
+    },
+    especie: {
+        type: String,
+        required: true
+    },
+    idade: {
+        type: Number,
+        required: true
+    },
+    cor: {
+        type: String,
+        required: true
+    },
+    // Adicionando uma referência ao cliente
+    dono: {
+        type: Schema.Types.ObjectId,
+        ref: 'Cliente',
+        required: true
+    }
 });
 
-// Criar schema principal com array de objetos
-const cliente = new mongoose.Schema({
-  nome: String,
-  idade: Number,
-  email: String,
-  telefone: String,
-  cpf: String,
-  rua: String,
-  bairro: String,
-  pets: [pet] // Array de objetos do tipo userSchema
-});
+const Pet = mongoose.model('Pet', petSchema);
 
-// Criar e exportar o modelo
-const Cliente = mongoose.model('Cliente', cliente);
-
-module.exports = Cliente;
+module.exports = Pet;

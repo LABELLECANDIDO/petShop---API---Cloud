@@ -1,59 +1,69 @@
 const Pet = require('../models/Pet');
+const Cliente = require('../models/Cliente');
 
 class PetController {
-    // Método para criar um novo 
-    async store(req, res) {
+    // Método para criar um novo pet
+    async createPet(req, res) {
         try {
-            const data = await Pet.create(req.body);
-            return res.status(200).json(data);
+            const pet = new Pet(req.body);
+            await pet.save();
+
+            // Associar o pet ao cliente
+            await Cliente.findByIdAndUpdate(pet.dono, { $push: { pets: pet._id } });
+
+            return res.status(201).json(pet);
         } catch (error) {
             return res.status(400).json({ error: error.message });
         }
     }
 
     // Método para obter todos os pets
-    async getAll(req, res) {
+    async getAllPets(req, res) {
         try {
-            const data = await Pet.find();
-            return res.status(200).json(data);
+            const pets = await Pet.find().populate('dono', 'nome');
+            return res.status(200).json(pets);
         } catch (error) {
             return res.status(500).json({ error: error.message });
         }
     }
 
-    // Método para obter um pet pelo ID
-    async getById(req, res) {
+    //  pet pelo ID
+    async getPetById(req, res) {
         try {
-            const data = await Pet.findById(req.params.id);
-            if (!data) {
+            const pet = await Pet.findById(req.params.id).populate('dono', 'nome');
+            if (!pet) {
                 return res.status(404).json({ error: 'Pet não encontrado' });
             }
-            return res.status(200).json(data);
+            return res.status(200).json(pet);
         } catch (error) {
             return res.status(500).json({ error: error.message });
         }
     }
 
-    // Método para atualizar um pet pelo ID
-    async update(req, res) {
+    // atualizar pet pelo ID
+    async updatePet(req, res) {
         try {
-            const data = await Pet.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-            if (!data) {
+            const pet = await Pet.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+            if (!pet) {
                 return res.status(404).json({ error: 'Pet não encontrado' });
             }
-            return res.status(200).json(data);
+            return res.status(200).json(pet);
         } catch (error) {
             return res.status(400).json({ error: error.message });
         }
     }
 
-    // Método para deletar um pet pelo ID
-    async delete(req, res) {
+    //excluir pet pelo ID
+    async deletePet(req, res) {
         try {
-            const data = await Pet.findByIdAndDelete(req.params.id);
-            if (!data) {
+            const pet = await Pet.findByIdAndDelete(req.params.id);
+            if (!pet) {
                 return res.status(404).json({ error: 'Pet não encontrado' });
             }
+
+            // Remover o pet do cliente associado
+            await Cliente.findByIdAndUpdate(pet.dono, { $pull: { pets: pet._id } });
+
             return res.status(200).json({ message: 'Pet deletado com sucesso' });
         } catch (error) {
             return res.status(500).json({ error: error.message });
@@ -62,5 +72,6 @@ class PetController {
 }
 
 module.exports = new PetController();
+
 
 

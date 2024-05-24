@@ -3,8 +3,7 @@ const uri =
 "mongodb+srv://dilermandobrito:z3LasUIEi1afuC6h@clusterpetshop.cbih1jk.mongodb.net/?retryWrites=true&w=majority&appName=ClusterPetShop";
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-
- .then(() => {
+    .then(() => {
         console.log('Conectado ao MongoDB');
     })
     .catch(err => {

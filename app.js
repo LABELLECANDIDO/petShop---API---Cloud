@@ -2,16 +2,19 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("./database");
 
-// Importa as rotas
 const petRoutes = require("./routes/pets");
+const clienteRoutes = require("./routes/clientes");
 
 const app = express();
 
 // Middleware para parsing de JSON
 app.use(bodyParser.json());
 
-// Usando as rotas de pets
+
 app.use('/pets', petRoutes);
+
+
+app.use('/clientes', clienteRoutes);
 
 // Middleware para tratamento de erros
 app.use((err, req, res, next) => {
@@ -26,6 +29,7 @@ const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+
 
 
 
