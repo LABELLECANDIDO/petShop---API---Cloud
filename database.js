@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
-const uri = process.env.MONGODB_URI;
+const uri = "mongodb+srv://dilermandobrito:5r1IN0TkHlKGBd2M@clusterpetshop.cbih1jk.mongodb.net/?retryWrites=true&w=majority&appName=ClusterPetShop";
 
 mongoose.connect(uri, {})
     .then(() => {

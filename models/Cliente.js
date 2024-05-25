@@ -18,7 +18,6 @@ const clienteSchema = new Schema({
         cidade: String
     },
     telefone: String,
-    // Adicionando uma relação com os animais de estimação
     pets: [{
         type: Schema.Types.ObjectId,
         ref: 'Pet'

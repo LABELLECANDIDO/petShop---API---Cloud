@@ -2,7 +2,7 @@ const Pet = require('../models/Pet');
 const Cliente = require('../models/Cliente');
 
 class PetController {
-    // Método para criar um novo pet
+    // Criar um novo pet
     async createPet(req, res) {
         try {
             const pet = new Pet(req.body);
@@ -17,17 +17,21 @@ class PetController {
         }
     }
 
-    // Método para obter todos os pets
+    // Buscar todos os pets ou filtrar por nome
     async getAllPets(req, res) {
         try {
-            const pets = await Pet.find().populate('dono', 'nome');
+            const filter = {};
+            if (req.query.nome) {
+                filter.nome = req.query.nome;
+            }
+            const pets = await Pet.find(filter).populate('dono', 'nome');
             return res.status(200).json(pets);
         } catch (error) {
             return res.status(500).json({ error: error.message });
         }
     }
 
-    //  pet pelo ID
+    // Buscar pet pelo ID
     async getPetById(req, res) {
         try {
             const pet = await Pet.findById(req.params.id).populate('dono', 'nome');
@@ -40,7 +44,7 @@ class PetController {
         }
     }
 
-    // atualizar pet pelo ID
+    // Atualizar pet pelo ID
     async updatePet(req, res) {
         try {
             const pet = await Pet.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
@@ -53,7 +57,7 @@ class PetController {
         }
     }
 
-    //excluir pet pelo ID
+    // Excluir pet pelo ID
     async deletePet(req, res) {
         try {
             const pet = await Pet.findByIdAndDelete(req.params.id);
@@ -72,6 +76,8 @@ class PetController {
 }
 
 module.exports = new PetController();
+
+
 
 
 

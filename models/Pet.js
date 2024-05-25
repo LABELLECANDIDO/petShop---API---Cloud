@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema; // Definindo Schema a partir do mongoose
+const Schema = mongoose.Schema; 
 
 const petSchema = new Schema({
     nome: {
@@ -18,7 +18,6 @@ const petSchema = new Schema({
         type: String,
         required: true
     },
-    // Adicionando uma referência ao cliente
     dono: {
         type: Schema.Types.ObjectId,
         ref: 'Cliente',
