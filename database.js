@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const uri =
 "mongodb+srv://dilermandobrito:z3LasUIEi1afuC6h@clusterpetshop.cbih1jk.mongodb.net/?retryWrites=true&w=majority&appName=ClusterPetShop";
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(uri, {})
     .then(() => {
         console.log('Conectado ao MongoDB');
     })

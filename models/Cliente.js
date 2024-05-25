@@ -23,8 +23,9 @@ const clienteSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Pet'
     }]
+}, {
+    versionKey: false // Define a opção versionKey como false para remover o campo __v
 });
-
 const Cliente = mongoose.model('Cliente', clienteSchema);
 
 module.exports = Cliente;

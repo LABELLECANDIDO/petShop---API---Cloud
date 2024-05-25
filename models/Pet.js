@@ -24,8 +24,9 @@ const petSchema = new Schema({
         ref: 'Cliente',
         required: true
     }
+}, {
+    versionKey: false // Define a opção versionKey como false para remover o campo __v
 });
-
 const Pet = mongoose.model('Pet', petSchema);
 
 module.exports = Pet;
