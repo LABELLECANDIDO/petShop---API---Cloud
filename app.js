@@ -25,11 +25,10 @@ app.use((err, req, res, next) => {
 
 const PORT = 3000;
 
-mongoose.connection.once('open', () => {
+
     app.listen(PORT, () => {
         console.log(`Servidor rodando na porta ${PORT}`);
     });
-});
 
 mongoose.connection.on('error', (err) => {
     console.error('Erro na conexão com o MongoDB:', err);
