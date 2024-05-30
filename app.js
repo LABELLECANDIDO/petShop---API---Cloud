@@ -2,12 +2,13 @@ const express = require("express");
 const mongoose = require("./database");
 const cors = require('cors');
 
+const app = express();
 const petRoutes = require("./routes/pets");
 const clienteRoutes = require("./routes/clientes");
 
-const app = express();
+const PORT = 3000;
+
 app.use(cors());
-// Middleware para parsing de JSON
 app.use(express.json());
 
 // Rotas
@@ -22,9 +23,6 @@ app.use((err, req, res, next) => {
         res.status(500).json(err);
     }
 });
-
-const PORT = 3000;
-
 
     app.listen(PORT, () => {
         console.log(`Servidor rodando na porta ${PORT}`);

@@ -31,7 +31,7 @@ class PetController {
         }
     }
 
-    // Buscar pet pelo ID
+    // pega pet pelo ID
     async getPetById(req, res) {
         try {
             const pet = await Pet.findById(req.params.id).populate('dono', 'nome');
