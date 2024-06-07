@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("./database");
-
+const cors = require('cors')
 
 const app = express();
 const petRoutes = require("./routes/pets");
@@ -8,7 +8,7 @@ const clienteRoutes = require("./routes/clientes");
 
 const PORT = 3000;
 
-
+app.use(cors({ origin: 'http://127.0.0.1:5500' }));
 app.use(express.json());
 
 // Rotas
